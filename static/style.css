@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.search-bar input[type="text"]:focus {
+    outline: none; /* Убираем обводку при фокусировке */
+}
+
+.buttons button {
+
+    text-decoration-line
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Добавленное свойство для задания отступа сверху */
+}
+
+.buttons {
+    position: absolute;
+    top: 20px; /* Задаем отступ сверху */
+    right: 10px;
+}
+
+.button-link {
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration-line: none;
+}
+
+
+.logo {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 100px;
+    background: -webkit-linear-gradient(left, #4285F4, #DB4437, #F4B400, #0F9D58);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text; /* Стандартное свойство */
+}
+
+/* Стили для темной темы */
+.dark-theme {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.dark-theme .search-bar input[type="text"] {
+    background-color: #333333;
+    color: #ffffff;
+    border: none
+}
+
+.dark-theme .buttons button {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+}
+
+.dark-theme .button-link {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    text-decoration-line:none;
+}
+
+.dark-theme .theme-switcher {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.dark-theme .about {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.about {
+    position: fixed;
+    bottom: 10px;
+    left: 90px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.theme-switcher {
+    position: fixed;
+    bottom: 10px;
+    left: 10px; /* Поменяйте значение в зависимости от вашего желаемого расстояния */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}  

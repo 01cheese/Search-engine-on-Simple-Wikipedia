@@ -1,0 +1,163 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000; /* Text color for light theme */
+}
+
+header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-form {
+    width: 800px;
+}
+
+hr {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border-style: inset;
+    border-width: 1px;
+    }
+
+.search-bar {
+    margin-bottom: 20px;
+
+}
+
+.search-bar input[type="text"] {
+    width: 800px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.search-bar input[type="text"]:focus {
+    outline: none; /* Убираем обводку при фокусировке */
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.search-results {
+    text-align: left;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.search-results h2 {
+    margin-bottom: 20px;
+}
+
+.search-result {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.result-title {
+    font-size: 18px;
+    color: #1a0dab;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.result-title:hover {
+    color: #1155cc;
+}
+
+.result-snippet {
+    color: #70757a;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+footer {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #888;
+}
+
+/* Dark Theme */
+.dark-theme {
+
+    hr {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        border-style: inset;
+        border-width: 1px;
+    }
+
+    background-color: #333333;
+    color: #ffffff;
+
+    header {
+        background-color: #333;
+    }
+
+    .search-bar {
+        margin-bottom: 20px;
+    }
+
+    .search-bar input[type="text"] {
+        width: 800px;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #1a1a1a;
+        color: #a1a1a1;
+        border: none;
+        border-radius: 20px;
+        margin: 10px;
+    }
+
+    .search-bar input[type="text"]:focus {
+        outline: none; /* Убираем обводку при фокусировке */
+    }
+
+    main {
+        background-color: #1a1a1a;
+    }
+
+    .search-results {
+        background-color: #1a1a1a;
+    }
+
+    .result-title {
+        color: #bb86fc;
+    }
+
+    .result-title:hover {
+        color: #03dac6;
+    }
+
+    .result-snippet {
+        color: #bdbdbd;
+    }
+
+    footer {
+        background-color: #333;
+    }
+}
