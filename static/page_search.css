@@ -161,3 +161,21 @@ footer p {
         background-color: #333;
     }
 }
+
+
+/* Добавим стили для полоски загрузки */
+.loading-bar {
+    width: 0;
+    height: 5px;
+    background-color: #4285f4;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+.dark-theme .loading-bar {
+    background-color: #03dac6;
+}
+
