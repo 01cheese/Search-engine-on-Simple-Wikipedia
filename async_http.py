@@ -34,4 +34,3 @@ async def main(urls):
         tasks = [get_wikipedia_info(session, url) for url in urls]
         results = await asyncio.gather(*tasks)
         return results
-
