@@ -1,5 +1,10 @@
 # Wikipedia Search Application
 
+![image](https://github.com/01cheese/Search-engine-on-Simple-Wikipedia/assets/115219323/cf175c0f-4264-4d43-90f9-17a98b90a8fd)
+![image](https://github.com/01cheese/Search-engine-on-Simple-Wikipedia/assets/115219323/9ba44e38-a923-4a02-84fb-69aa01fff9c3)
+
+
+
 This project is a Flask-based web application designed to perform keyword-based searches on a dataset derived from the Simple English Wikipedia. The application processes search queries, identifies relevant Wikipedia articles, and retrieves summarized information for display.
 
 ## Features
