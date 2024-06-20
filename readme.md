@@ -2,6 +2,8 @@
 
 ![image](https://github.com/01cheese/Search-engine-on-Simple-Wikipedia/assets/115219323/cf175c0f-4264-4d43-90f9-17a98b90a8fd)
 ![image](https://github.com/01cheese/Search-engine-on-Simple-Wikipedia/assets/115219323/9ba44e38-a923-4a02-84fb-69aa01fff9c3)
+![image](https://github.com/01cheese/Search-engine-on-Simple-Wikipedia/assets/115219323/e5ca497c-d50b-44c8-97cf-a24f4e60e977)
+
 
 
 
