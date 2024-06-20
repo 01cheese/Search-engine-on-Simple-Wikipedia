@@ -1,15 +1,31 @@
-from flask import Flask, render_template, request
-from test import load_data_from_db, preprocess_data,find_similar_keywords
+from flask import Flask, render_template, request, jsonify
+from test import load_data_from_db, preprocess_data, find_similar_keywords
 import async_http
 
-
-nothing_found = [{'title': None, 'first_sentence': 'Failed to retrieve data from Wikipedia.', 'url': 'https://simple.wikipedia.org/wiki/Kramfors'}, {'title': '2020 Belizean general election', 'first_sentence': 'The 2020 Belizean general election elected the members of the House of Representatives in the National Assembly.', 'url': 'https://simple.wikipedia.org/wiki/2020_Belizean_general_election'}, {'title': 'United Democratic Party (Belize)', 'first_sentence': 'The United Democratic Party  is one of the two major political parties in Belize.', 'url': 'https://simple.wikipedia.org/wiki/United_Democratic_Party_(Belize)'}, {'title': 'Manuel Esquivel', 'first_sentence': 'Sir Manuel Amadeo Esquivel, KCMG, PC  is a Belizean politician.', 'url': 'https://simple.wikipedia.org/wiki/Manuel_Esquivel'}]
-
+nothing_found = [{'title': 'Basic English',
+                  'first_sentence': 'BASIC English  is a controlled language used to explain complex thoughts.',
+                  'url': 'https://simple.wikipedia.org/wiki/Basic_English'},
+                 {'title': None, 'first_sentence': 'Failed to retrieve data from Wikipedia.',
+                  'url': 'https://simple.wikipedia.org/wiki/Kramfors'},
+                 {'title': 'Bullet Club',
+                  'first_sentence': 'Bullet Club  is a professional wrestling stable that competes in the New Japan Pro-Wrestling .',
+                  'url': 'https://simple.wikipedia.org/wiki/Bullet_Club_Gold'},
+                 {'title': 'Seo Tai-ji', 'first_sentence': 'Seo Tai-ji  is a South Korean singer.',
+                  'url': 'https://simple.wikipedia.org/wiki/Seo_Tai-ji'},
+                 {'title': 'Odia language', 'first_sentence': None, 'url': 'https://simple.wikipedia.org/wiki/Oriya'},
+                 {'title': 'Oriya film industry',
+                  'first_sentence': 'Oriya Film Industry or Ollywood refers to the Bhubaneswar and Cuttack-based Oriya film industry in the Republic of India.',
+                  'url': 'https://simple.wikipedia.org/wiki/Oriya_film_industry'},
+                 {'title': None, 'first_sentence': 'Failed to retrieve data from Wikipedia.',
+                  'url': 'https://simple.wikipedia.org/wiki/Gili_Air'},
+                 {'title': None, 'first_sentence': 'Failed to retrieve data from Wikipedia.',
+                  'url': 'https://simple.wikipedia.org/wiki/Gili_Meno'},
+                 {'title': 'Quilmesaurus', 'first_sentence': None,
+                  'url': 'https://simple.wikipedia.org/wiki/Quilmesaurus'}]
 
 # Загрузка данных и предварительная обработка
 df = load_data_from_db()
 vectorizer, tfidf_matrix = preprocess_data(df)
-
 
 app = Flask(__name__)
 
@@ -19,43 +35,27 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/search', methods=['POST'])
-def search():
+@app.route('/ajax_search', methods=['POST'])
+def ajax_search():
     query = request.form['query']
-    if query == '':
-        return render_template('index.html')
+    similar_keywords, similar_urls = find_similar_keywords(query, vectorizer, tfidf_matrix, df)
+    result = async_http.asyncio.run(async_http.main(similar_urls))
+
+    cleaned_list = []
+    titles_seen = set()
+
+    for item in result:
+        title = item['title']
+        if title not in titles_seen:
+            cleaned_list.append(item)
+            titles_seen.add(title)
+
+    if all(item in result for item in nothing_found):
+        return jsonify(status='nothing found', query=query)
     else:
-        similar_keywords, similar_urls = find_similar_keywords(query, vectorizer, tfidf_matrix, df)
-
-        result = async_http.asyncio.run(async_http.main(similar_urls))
-
-        cleaned_list = []
-        titles_seen = set()
-
-        for item in result:
-            title = item['title']
-            if title not in titles_seen:
-                cleaned_list.append(item)
-                titles_seen.add(title)
-
-        result = cleaned_list
-        if all(item in result for item in nothing_found):
-            return render_template('result.html', query=query, zipped_data=0)
-        else:
-            title_page = []
-            first_sentence = []
-            url_page = []
-            for page_data in result:
-                if page_data['title'] == None:
-                    page_data['title'] = page_data['url']
-                if page_data['first_sentence'] == None:
-                    page_data['first_sentence'] = ''
-
-                url_page.append(page_data['url'])
-                title_page.append(page_data['title'])
-                first_sentence.append(page_data['first_sentence'])
-            zipped_data = zip(title_page, url_page, first_sentence)
-            return render_template('result.html', query=query, zipped_data=zipped_data)
+        response = [{'title': item['title'], 'url': item['url'], 'first_sentence': item['first_sentence']} for item in
+                    cleaned_list]
+        return jsonify(status='success', query=query, results=response)
 
 
 if __name__ == '__main__':
